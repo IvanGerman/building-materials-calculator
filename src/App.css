@@ -10,3 +10,10 @@
   width: 150px;
   height: 100px;
 }
+
+.selected-item-img {
+  width: 50px;
+  object-fit: contain;
+  cursor: move;
+  margin-right: 10vw;
+}
