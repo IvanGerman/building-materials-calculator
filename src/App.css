@@ -11,9 +11,18 @@
   height: 100px;
 }
 
+.single-selected-item {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10vw;
+}
+
 .selected-item-img {
   width: 50px;
   object-fit: contain;
   cursor: move;
-  margin-right: 10vw;
+}
+
+#quantity {
+  height: 2vh;
 }
