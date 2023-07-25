@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import basket from './assets/img/basket2.jpg'
+import basket from './assets/img/itemsplace.png'
 import board from './assets/img/doska25-100.png'
 
 function App() {
@@ -19,6 +19,13 @@ function App() {
 
     selectedBoard.ondragstart = function callback(event) {
       console.log('selectedBoard.ondragstart'); 
+      const currentToy: HTMLImageElement = event.target as HTMLImageElement;
+      if (currentToy.tagName === 'IMG') {
+      putItemToBasket(currentToy);
+      console.log(currentToy);
+      
+      
+    }
     };
 
       function handleOver(event: Event) {
@@ -40,6 +47,30 @@ function App() {
       function handleDrop(event: Event) {
         event.preventDefault();
         console.log('handleDrop');
+        // let quantity = quantityInput.value;
+        // let width = widthSelect.value;
+        // let length = lengthSelect.value;
+        // console.log(quantity);
+        // console.log(width);
+        // console.log(length);
+        // let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
+        // console.log('Объём заказа в кубических метрах = ', volume);
+      }
+
+      function putItemToBasket(currentToy: HTMLImageElement) {
+        
+        console.log('putItemToBasket');
+        function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
+  
+          event.preventDefault();
+          Object.assign(currentToy.style, {
+          zIndex: '1000', position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
+          });
+        };
+
+        const basketTargetZone: HTMLElement = document.querySelector('.basketTargetZone') as HTMLElement;
+        basketTargetZone.ondrop = handleDrop2;
+
         let quantity = quantityInput.value;
         let width = widthSelect.value;
         let length = lengthSelect.value;
@@ -84,11 +115,11 @@ function App() {
           <option value="6">6</option>
         </select>
         <label htmlFor="quantity">Количество:</label>
-        <input type="number" id="quantity" name="quantity" min="1" ></input>
+        <input type="number" id="quantity" name="quantity" placeholder="0" min="1" ></input>
       </div>
       <img src={basket} alt='' className="basket" useMap="#basket-map"/>
       <map  name="basket-map">
-        <area className="basketTargetZone" shape="rect" coords="0,0,250,150" alt=''/>
+        <area className="basketTargetZone" shape="rect" coords="0,0,500,300" alt=''/>
       </map>
     </div>
   );
