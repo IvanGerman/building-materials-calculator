@@ -63,9 +63,19 @@ function App() {
         function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
   
           event.preventDefault();
-          Object.assign(currentToy.style, {
+          const currentToyWrapper: HTMLElement = document.querySelector('.selected-item-img')!;
+          Object.assign(currentToyWrapper.style, {
           zIndex: '1000', position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
           });
+          //add divs with order info
+          console.log('currentToyWrapper.children--',currentToyWrapper.children);
+          if (currentToyWrapper.children.length <= 1) {
+            const orderInfoWrapper = document.createElement("div");
+          orderInfoWrapper.className = "orderInfoWrapper";
+          orderInfoWrapper.innerHTML = `${quantity} шт.`;
+          currentToyWrapper.appendChild(orderInfoWrapper);
+          }
+       
         };
 
         const basketTargetZone: HTMLElement = document.querySelector('.basketTargetZone') as HTMLElement;
@@ -97,7 +107,9 @@ function App() {
     <div className="App">
       <div className="single-selected-item">
         <p>Тёс (25мм) </p>
-        <img className="selected-item-img" src={board} alt="" draggable="true"/>
+        <div className="selected-item-img" draggable="true">
+          <img className="selected-item-img2" src={board} alt="" />
+        </div>
         <label htmlFor="width">Выбрать ширину (мм):</label>
         <select id='width' name="width" size={x}>
           <option value="100">100</option>
