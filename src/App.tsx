@@ -6,7 +6,26 @@ import board from './assets/img/doska25-100.png'
 function App() {
 
   useEffect(() => {
-    const selectedBoard: HTMLElement = document.querySelector('.selected-item-img') as HTMLElement;
+    const selectedItem: HTMLElement = document.querySelector('.selected-item-img') as HTMLElement;
+    // get initial coordinates of selectedItem
+    const positionData = selectedItem.getBoundingClientRect();
+    console.log('positionData--',positionData);
+    //add eventlistener to the selectedItem to recreate it at his previous place
+    selectedItem.addEventListener('dblclick', () => {
+      console.log('dblclick ');
+      selectedItem.remove();
+      const selectedItem2 = document.createElement("div")!;
+      selectedItem2.className = "selected-item-img";
+      selectedItem2.draggable = true;
+      const img2 = document.createElement("img")!;
+      img2.className = "selected-item-img2";
+      img2.src = board;
+      img2.alt = '';
+      selectedItem2.prepend(img2);
+      const selectedItem2Wrapper = document.querySelector('.single-selected-item')!; 
+      selectedItem2Wrapper.prepend(selectedItem2);
+    })
+    
 
     // taking data from input/select elements
     const quantityInput: HTMLInputElement = document.querySelector('#quantity') as HTMLInputElement;
@@ -17,8 +36,8 @@ function App() {
     
     
 
-    selectedBoard.ondragstart = function callback(event) {
-      console.log('selectedBoard.ondragstart'); 
+    selectedItem.ondragstart = function callback(event) {
+      console.log('selectedItem.ondragstart'); 
       const currentToy: HTMLImageElement = event.target as HTMLImageElement;
       if (currentToy.tagName === 'IMG') {
       putItemToBasket(currentToy);
@@ -47,14 +66,7 @@ function App() {
       function handleDrop(event: Event) {
         event.preventDefault();
         console.log('handleDrop');
-        // let quantity = quantityInput.value;
-        // let width = widthSelect.value;
-        // let length = lengthSelect.value;
-        // console.log(quantity);
-        // console.log(width);
-        // console.log(length);
-        // let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
-        // console.log('Объём заказа в кубических метрах = ', volume);
+        
       }
 
       function putItemToBasket(currentToy: HTMLImageElement) {
@@ -63,17 +75,16 @@ function App() {
         function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
   
           event.preventDefault();
-          const currentToyWrapper: HTMLElement = document.querySelector('.selected-item-img')!;
-          Object.assign(currentToyWrapper.style, {
+          Object.assign(selectedItem.style, {
           zIndex: '1000', position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
           });
           //add divs with order info
-          console.log('currentToyWrapper.children--',currentToyWrapper.children);
-          if (currentToyWrapper.children.length <= 1) {
+          console.log('selectedItem.children--',selectedItem.children);
+          if (selectedItem.children.length <= 1) {
             const orderInfoWrapper = document.createElement("div");
-          orderInfoWrapper.className = "orderInfoWrapper";
-          orderInfoWrapper.innerHTML = `${quantity} шт.`;
-          currentToyWrapper.appendChild(orderInfoWrapper);
+            orderInfoWrapper.className = "orderInfoWrapper";
+            orderInfoWrapper.innerHTML = `${quantity} шт.`;
+            selectedItem.appendChild(orderInfoWrapper);
           }
        
         };
@@ -99,7 +110,7 @@ function App() {
       basketTargetZone.ondrop = handleDrop;
     
     
-  }, []);
+  });
 
   let x = 1;
 
