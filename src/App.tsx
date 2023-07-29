@@ -12,29 +12,14 @@ function App() {
     const selectedItem: HTMLElement = document.querySelector('.selected-item-img') as HTMLElement;
 
 
-    //add eventlistener to the selectedItem to recreate it at his previous place
+    //add eventlistener to the selectedItem to move it to his previous place on double click
     selectedItem.addEventListener('dblclick', () => {
-      console.log('dblclick ');
-      selectedItem.remove();
-      const selectedItem2 = document.createElement("div")!;
-      selectedItem2.className = "selected-item-img";
-      selectedItem2.draggable = true;
-      const img2 = document.createElement("img")!;
-      img2.className = "selected-item-img2";
-      img2.src = board;
-      img2.alt = '';
-      selectedItem2.prepend(img2);
-      const selectedItem2Wrapper = document.querySelector('.single-selected-item')!; 
-      selectedItem2Wrapper.prepend(selectedItem2);
-
-      selectedItem2.addEventListener('dragstart', (event) => {
-        console.log('selectedItem2.ondragstart'); 
-        const currentToy: HTMLImageElement = event.target as HTMLImageElement;
-        if (currentToy.tagName === 'IMG') {
-        putItemToBasket(currentToy);
-        console.log(currentToy);
-        }
-      })
+      while (selectedItem.childNodes.length > 1) {
+        selectedItem.removeChild(selectedItem.lastChild!);
+      }
+      Object.assign(selectedItem.style, {
+        position: 'static'
+      });
     })
     
 
@@ -49,7 +34,6 @@ function App() {
       if (currentToy.tagName === 'IMG') {
       const currentToyParentElement = currentToy.parentElement!;
       putItemToBasket(currentToyParentElement);
-      console.log('ll',currentToy.parentElement);
       }
     })
 
@@ -60,9 +44,11 @@ function App() {
         function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
   
           event.preventDefault();
+          currentToyParentElement.style.zIndex = '1000';
           Object.assign(currentToyParentElement.style, {
-          zIndex: '1000', position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
+           position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
           });
+
           //add divs with order info
           console.log('currentToyParentElement.children--',currentToyParentElement.children);
           if (currentToyParentElement.children.length <= 1) {
