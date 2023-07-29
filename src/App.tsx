@@ -47,28 +47,29 @@ function App() {
       console.log('selectedItem.ondragstart'); 
       const currentToy: HTMLImageElement = event.target as HTMLImageElement;
       if (currentToy.tagName === 'IMG') {
-      putItemToBasket(currentToy);
-      console.log(currentToy);
+      const currentToyParentElement = currentToy.parentElement!;
+      putItemToBasket(currentToyParentElement);
+      console.log('ll',currentToy.parentElement);
       }
     })
 
 
-    function putItemToBasket(currentToy: HTMLImageElement) {
+    function putItemToBasket(currentToyParentElement: HTMLElement) {
         
         console.log('putItemToBasket');
         function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
   
           event.preventDefault();
-          Object.assign(selectedItem.style, {
+          Object.assign(currentToyParentElement.style, {
           zIndex: '1000', position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
           });
           //add divs with order info
-          console.log('selectedItem.children--',selectedItem.children);
-          if (selectedItem.children.length <= 1) {
+          console.log('currentToyParentElement.children--',currentToyParentElement.children);
+          if (currentToyParentElement.children.length <= 1) {
             const orderInfoWrapper = document.createElement("div");
             orderInfoWrapper.className = "orderInfoWrapper";
             orderInfoWrapper.innerHTML = `${quantity} шт.`;
-            selectedItem.appendChild(orderInfoWrapper);
+            currentToyParentElement.appendChild(orderInfoWrapper);
           }
        
         };
