@@ -6,12 +6,12 @@
   align-items: center;
 }
 
-.basket {
+/* .basket {
   width: 500px;
   height: 300px;
-}
+} */
 
-.single-selected-item {
+/* .single-selected-item {
   display: flex;
   flex-direction: column;
   margin-right: 10vw;
@@ -25,7 +25,7 @@
 .selected-item-img2 {
   width: 50px;
   object-fit: contain;
-}
+} */
 
 .orderInfoWrapper {
   width: 50px;

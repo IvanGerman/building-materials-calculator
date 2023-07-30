@@ -3,13 +3,20 @@ import './App.css';
 import basket from './assets/img/itemsplace.png'
 import board from './assets/img/doska25-100.png'
 import { preventDefaultObj } from './modules/preventDefaultObj';
+import Basket from './components/Basket/Basket';
+import Item25 from './components/Item25/Item25';
+
+import styles from './components/Basket/Basket.module.css';
+import styles2 from './components/Item25/Item25.module.css';
 
 function App() {
 
   useEffect(() => {
 
-    const basketTargetZone: HTMLElement = document.querySelector('.basketTargetZone') as HTMLElement;
-    const selectedItem: HTMLElement = document.querySelector('.selected-item-img') as HTMLElement;
+    const basketTargetZone: HTMLElement = document.querySelector(`.${styles.basketTargetZone}`) as HTMLElement;
+    const selectedItem: HTMLElement = document.querySelector(`.${styles2.selectedItemImg}`) as HTMLElement;
+    //const basketTargetZone: HTMLElement = document.querySelector('.basketTargetZone') as HTMLElement;
+    // const selectedItem: HTMLElement = document.querySelector('.selectedItemImg') as HTMLElement;
 
 
     //add eventlistener to the selectedItem to move it to his previous place on double click
@@ -86,7 +93,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className="single-selected-item">
+      <Item25/>
+      {/* <div className="single-selected-item">
         <p>Тёс (25мм) </p>
         <div className="selected-item-img" draggable="true">
           <img className="selected-item-img2" src={board} alt="" />
@@ -98,6 +106,7 @@ function App() {
           <option value="150">150</option>
           <option value="180">180</option>
           <option value="200">200</option>
+          <option value="250">250</option>
         </select>
         <label htmlFor="length">Выбрать длину (метры):</label>
         <select id='length' name="length" size={x}>
@@ -109,11 +118,9 @@ function App() {
         </select>
         <label htmlFor="quantity">Количество:</label>
         <input type="number" id="quantity" name="quantity" placeholder="0" min="1" ></input>
-      </div>
-      <img src={basket} alt='' className="basket" useMap="#basket-map"/>
-      <map  name="basket-map">
-        <area className="basketTargetZone" shape="rect" coords="0,0,500,300" alt=''/>
-      </map>
+      </div> */}
+      <Basket/>
+      
     </div>
   );
 }
