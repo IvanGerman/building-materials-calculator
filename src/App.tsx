@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import basket from './assets/img/itemsplace.png'
-import board from './assets/img/doska25-100.png'
 import { preventDefaultObj } from './modules/preventDefaultObj';
-import Basket from './components/Basket/Basket';
+import Basket, { v } from './components/Basket/Basket';
 import Item25 from './components/Item25/Item25';
 
 import styles from './components/Basket/Basket.module.css';
@@ -14,10 +12,10 @@ function App() {
   useEffect(() => {
 
     const basketTargetZone: HTMLElement = document.querySelector(`.${styles.basketTargetZone}`) as HTMLElement;
+    console.log('v', v );
+    
     const selectedItem: HTMLElement = document.querySelector(`.${styles2.selectedItemImg}`) as HTMLElement;
-    //const basketTargetZone: HTMLElement = document.querySelector('.basketTargetZone') as HTMLElement;
-    // const selectedItem: HTMLElement = document.querySelector('.selectedItemImg') as HTMLElement;
-
+  
 
     //add eventlistener to the selectedItem to move it to his previous place on double click
     selectedItem.addEventListener('dblclick', () => {
@@ -89,36 +87,11 @@ function App() {
     
   });
 
-  let x = 1;
 
   return (
     <div className="App">
+
       <Item25/>
-      {/* <div className="single-selected-item">
-        <p>Тёс (25мм) </p>
-        <div className="selected-item-img" draggable="true">
-          <img className="selected-item-img2" src={board} alt="" />
-        </div>
-        <label htmlFor="width">Выбрать ширину (мм):</label>
-        <select id='width' name="width" size={x}>
-          <option value="100">100</option>
-          <option value="120">120</option>
-          <option value="150">150</option>
-          <option value="180">180</option>
-          <option value="200">200</option>
-          <option value="250">250</option>
-        </select>
-        <label htmlFor="length">Выбрать длину (метры):</label>
-        <select id='length' name="length" size={x}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="6">6</option>
-        </select>
-        <label htmlFor="quantity">Количество:</label>
-        <input type="number" id="quantity" name="quantity" placeholder="0" min="1" ></input>
-      </div> */}
       <Basket/>
       
     </div>
