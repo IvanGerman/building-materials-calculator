@@ -14,6 +14,24 @@ const Item25 = () => {
     const widthSelect: HTMLInputElement = document.querySelector('#width') as HTMLInputElement;
     const lengthSelect: HTMLInputElement = document.querySelector('#length') as HTMLInputElement;
 
+    // taking data from input/select elements
+      
+    const getDataFromInputs = () => {
+      let quantity = quantityInput.value;
+      let width = widthSelect.value;
+      let length = lengthSelect.value;
+      console.log(quantity);
+      console.log(width);
+      console.log(length);
+      let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
+      console.log('Объём заказа в кубических метрах = ', volume);
+
+      return quantity;
+    }  
+    
+
+
+
     selectedItem.addEventListener('dragstart', (event) => {
       console.log('selectedItem.ondragstart'); 
       const currentToy: HTMLImageElement = event.target as HTMLImageElement;
@@ -33,13 +51,20 @@ const Item25 = () => {
         Object.assign(currentToyParentElement.style, {
          position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
         });
+        
+        // here handle the case with repeated drop () when isItemInsideBasket = true
+        // handle case when isItemInsideBasket = true
+        quantityInput.addEventListener('change', () => {
+          console.log('adjustQuantity');
+        })
 
+        
         //add divs with order info
         console.log('currentToyParentElement.children--',currentToyParentElement.children);
         if (currentToyParentElement.children.length <= 1) {
           const orderInfoWrapper = document.createElement("div");
           orderInfoWrapper.className = "orderInfoWrapper";
-          orderInfoWrapper.innerHTML = `${quantity} шт.`;
+          orderInfoWrapper.innerHTML = `${getDataFromInputs()} шт.`;
           currentToyParentElement.appendChild(orderInfoWrapper);
         }
      
@@ -48,17 +73,7 @@ const Item25 = () => {
       basketTargetZone.ondrop = handleDrop2;
 
 
-      // taking data from input/select elements
       
-
-      let quantity = quantityInput.value;
-      let width = widthSelect.value;
-      let length = lengthSelect.value;
-      console.log(quantity);
-      console.log(width);
-      console.log(length);
-      let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
-      console.log('Объём заказа в кубических метрах = ', volume);
     }
 
 
@@ -74,10 +89,7 @@ const Item25 = () => {
     });
 
 
-    // handle case when isItemInsideBasket = true
-    quantityInput.addEventListener('change', () => {
-      console.log('adjustQuantity');
-    })
+    
     
   })
 
