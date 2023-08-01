@@ -1,14 +1,85 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styles from './Item25.module.css';
 import board from './../../assets/img/doska25-100.png'
+import { basketTargetZone } from "../Basket/Basket";
 
 
 const Item25 = () => { 
 
-// this is how to select html element by class using css-modules: 
-// document.querySelector(`.${styles.updateMenu}`)
-// const updateMenu = document.querySelector(`.${styles.updateMenu}`);
+  useEffect(() => {
+
+    const selectedItem: HTMLElement = document.querySelector(`.${styles.selectedItemImg}`) as HTMLElement;
+    const quantityInput: HTMLInputElement = document.querySelector('#quantity') as HTMLInputElement;
+    const widthSelect: HTMLInputElement = document.querySelector('#width') as HTMLInputElement;
+    const lengthSelect: HTMLInputElement = document.querySelector('#length') as HTMLInputElement;
+
+    selectedItem.addEventListener('dragstart', (event) => {
+      console.log('selectedItem.ondragstart'); 
+      const currentToy: HTMLImageElement = event.target as HTMLImageElement;
+      if (currentToy.tagName === 'IMG') {
+      const currentToyParentElement = currentToy.parentElement!;
+      putItemToBasket(currentToyParentElement);
+      }
+    });
+
+    function putItemToBasket(currentToyParentElement: HTMLElement) {
+        
+      console.log('putItemToBasket');
+      function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
+
+        event.preventDefault();
+        currentToyParentElement.style.zIndex = '1000';
+        Object.assign(currentToyParentElement.style, {
+         position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
+        });
+
+        //add divs with order info
+        console.log('currentToyParentElement.children--',currentToyParentElement.children);
+        if (currentToyParentElement.children.length <= 1) {
+          const orderInfoWrapper = document.createElement("div");
+          orderInfoWrapper.className = "orderInfoWrapper";
+          orderInfoWrapper.innerHTML = `${quantity} шт.`;
+          currentToyParentElement.appendChild(orderInfoWrapper);
+        }
+     
+      };
+
+      basketTargetZone.ondrop = handleDrop2;
+
+
+      // taking data from input/select elements
+      
+
+      let quantity = quantityInput.value;
+      let width = widthSelect.value;
+      let length = lengthSelect.value;
+      console.log(quantity);
+      console.log(width);
+      console.log(length);
+      let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
+      console.log('Объём заказа в кубических метрах = ', volume);
+    }
+
+
+
+    //add eventlistener to the selectedItem to move it to his previous place on double click
+    selectedItem.addEventListener('dblclick', () => {
+      while (selectedItem.childNodes.length > 1) {
+        selectedItem.removeChild(selectedItem.lastChild!);
+      }
+      Object.assign(selectedItem.style, {
+        position: 'static'
+      });
+    });
+
+
+    // handle case when isItemInsideBasket = true
+    quantityInput.addEventListener('change', () => {
+      console.log('adjustQuantity');
+    })
+    
+  })
 
 
 
@@ -34,6 +105,7 @@ const Item25 = () => {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
+          <option value="5">5</option>
           <option value="6">6</option>
         </select>
         <label htmlFor="quantity">Количество:</label>

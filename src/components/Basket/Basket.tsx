@@ -2,17 +2,20 @@ import React, { useEffect }  from "react";
 
 import styles from './Basket.module.css';
 import basket from './../../assets/img/itemsplace.png'
+import { preventDefaultObj } from "../../modules/preventDefaultObj";
 
 
 const Basket = () => { 
 
-// this is how to select html element by class using css-modules: 
-// document.querySelector(`.${styles.updateMenu}`)
-// const updateMenu = document.querySelector(`.${styles.updateMenu}`);
   useEffect(() => {
-    const basketTargetZone: HTMLElement = document.querySelector(`.${styles.basketTargetZone}`) as HTMLElement;
+    const basketTargetZoneForExp: HTMLElement = document.querySelector(`.${styles.basketTargetZone}`) as HTMLElement;
 
-    v = basketTargetZone;
+    basketTargetZoneForExp.ondragover = preventDefaultObj.handleOver;
+    basketTargetZoneForExp.ondragenter = preventDefaultObj.handleEnter;
+    basketTargetZoneForExp.ondragleave = preventDefaultObj.handleLeave;
+    basketTargetZoneForExp.ondrop = preventDefaultObj.handleDrop;
+
+    basketTargetZone = basketTargetZoneForExp;
   })
   
   return (
@@ -23,8 +26,8 @@ const Basket = () => {
       </map>
     </>
   )
-}
+};
+
 
 export default Basket;
-
-export let v: string | HTMLElement = '';
+export let basketTargetZone: HTMLElement;
