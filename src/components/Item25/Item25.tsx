@@ -9,6 +9,8 @@ const Item25 = () => {
 
   useEffect(() => {
 
+    let isItemInsideBasket: boolean;
+
     const selectedItem: HTMLElement = document.querySelector(`.${styles.selectedItemImg}`) as HTMLElement;
     const quantityInput: HTMLInputElement = document.querySelector('#quantity') as HTMLInputElement;
     const widthSelect: HTMLInputElement = document.querySelector('#width') as HTMLInputElement;
@@ -42,9 +44,12 @@ const Item25 = () => {
     });
 
     function putItemToBasket(currentToyParentElement: HTMLElement) {
+
         
       console.log('putItemToBasket');
       function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
+
+        isItemInsideBasket = true;
 
         event.preventDefault();
         currentToyParentElement.style.zIndex = '1000';
@@ -56,11 +61,17 @@ const Item25 = () => {
         // handle case when isItemInsideBasket = true and we change values in our inputs
         // it should be handled only when isItemInsideBasket = true, 
         // if isItemInsideBasket is becoming false we must remove eventlist.
-        quantityInput.addEventListener('change', () => {
-          console.log('adjustQuantity');
-          const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-          putDataToOrderInfoDivs(orderInfoWrapper);
-        })
+        if ( isItemInsideBasket === true ) {
+          quantityInput.addEventListener('change', () => {
+            if ( isItemInsideBasket === true ) {
+              console.log('adjustQuantity');
+              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+              putDataToOrderInfoDivs(orderInfoWrapper);
+            }
+            return
+          })
+        }
+        
 
         
         //add divs with order info
@@ -99,6 +110,7 @@ const Item25 = () => {
       Object.assign(selectedItem.style, {
         position: 'static'
       });
+      isItemInsideBasket = false
     });
 
 
