@@ -26,7 +26,7 @@ const Item25 = () => {
       let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
       console.log('Объём заказа в кубических метрах = ', volume);
 
-      return quantity;
+      return [ quantity, width, length , volume];
     }  
     
 
@@ -52,10 +52,14 @@ const Item25 = () => {
          position: 'absolute', left: `${event.clientX - 40}px`, top: `${event.clientY - 40}px`,
         });
         
-        // here handle the case with repeated drop () when isItemInsideBasket = true
-        // handle case when isItemInsideBasket = true
+        
+        // handle case when isItemInsideBasket = true and we change values in our inputs
+        // it should be handled only when isItemInsideBasket = true, 
+        // if isItemInsideBasket is becoming false we must remove eventlist.
         quantityInput.addEventListener('change', () => {
           console.log('adjustQuantity');
+          const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+          putDataToOrderInfoDivs(orderInfoWrapper);
         })
 
         
@@ -64,8 +68,17 @@ const Item25 = () => {
         if (currentToyParentElement.children.length <= 1) {
           const orderInfoWrapper = document.createElement("div");
           orderInfoWrapper.className = "orderInfoWrapper";
-          orderInfoWrapper.innerHTML = `${getDataFromInputs()} шт.`;
+          //orderInfoWrapper.innerHTML = `${getDataFromInputs()} шт.`;
           currentToyParentElement.appendChild(orderInfoWrapper);
+        }
+
+        //put input data inside of order info divs
+        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement) => {
+          infoDiv1!.innerHTML = `${getDataFromInputs()[0]} шт.`;
+        }
+        if (currentToyParentElement.children.length > 1) {
+          const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+          putDataToOrderInfoDivs(orderInfoWrapper);
         }
      
       };
