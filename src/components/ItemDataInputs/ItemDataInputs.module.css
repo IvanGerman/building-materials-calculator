@@ -1,0 +1,15 @@
+.singleSelectedItem {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10vw;
+}
+
+.selectedItemImg {
+  width: 50px;
+  cursor: move;
+}
+
+.selectedItemImg2 {
+  width: 50px;
+  object-fit: contain;
+}

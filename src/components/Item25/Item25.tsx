@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
 import styles from './Item25.module.css';
-import board from './../../assets/img/doska25-100.png'
 import { basketTargetZone } from "../Basket/Basket";
+import ItemDescription, { selectedItem } from "../ItemDescription/ItemDescription";
+import ItemDataInputs, { lengthInput, quantityInput, widthInput } from "../ItemDataInputs/ItemDataInputs";
 
 
 const Item25 = () => { 
@@ -11,17 +12,12 @@ const Item25 = () => {
 
     let isItemInsideBasket: boolean;
 
-    const selectedItem: HTMLElement = document.querySelector(`.${styles.selectedItemImg}`) as HTMLElement;
-    const quantityInput: HTMLInputElement = document.querySelector('#quantity') as HTMLInputElement;
-    const widthSelect: HTMLInputElement = document.querySelector('#width') as HTMLInputElement;
-    const lengthSelect: HTMLInputElement = document.querySelector('#length') as HTMLInputElement;
-
     // taking data from input/select elements
       
     const getDataFromInputs = () => {
       let quantity = quantityInput.value;
-      let width = widthSelect.value;
-      let length = lengthSelect.value;
+      let width = widthInput.value;
+      let length = lengthInput.value;
       console.log(quantity);
       console.log(width);
       console.log(length);
@@ -31,8 +27,6 @@ const Item25 = () => {
       return [ quantity, width, length , volume];
     }  
     
-
-
 
     selectedItem.addEventListener('dragstart', (event) => {
       console.log('selectedItem.ondragstart'); 
@@ -95,12 +89,8 @@ const Item25 = () => {
       };
 
       basketTargetZone.ondrop = handleDrop2;
-
-
       
     }
-
-
 
     //add eventlistener to the selectedItem to move it to his previous place on double click
     selectedItem.addEventListener('dblclick', () => {
@@ -112,9 +102,6 @@ const Item25 = () => {
       });
       isItemInsideBasket = false
     });
-
-
-    
     
   })
 
@@ -123,31 +110,11 @@ const Item25 = () => {
   
   return (
     <div className={styles.singleSelectedItem}>
-        <p>Тёс (25мм) </p>
-        <div className={styles.selectedItemImg} draggable="true">
-          <img className={styles.selectedItemImg2} src={board} alt="" />
-        </div>
-        <label htmlFor="width">Выбрать ширину (мм):</label>
-        <select id='width' name="width" size={1}>
-          <option value="100">100</option>
-          <option value="120">120</option>
-          <option value="150">150</option>
-          <option value="180">180</option>
-          <option value="200">200</option>
-          <option value="250">250</option>
-        </select>
-        <label htmlFor="length">Выбрать длину (метры):</label>
-        <select id='length' name="length" size={1}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        <label htmlFor="quantity">Количество:</label>
-        <input type="number" id="quantity" name="quantity" placeholder="0" min="1" ></input>
-      </div>
+        
+        <ItemDescription/>
+        <ItemDataInputs/>
+        
+    </div>
   )
 }
 
