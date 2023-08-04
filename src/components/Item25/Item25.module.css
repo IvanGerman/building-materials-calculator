@@ -7,9 +7,11 @@
 .selectedItemImg {
   width: 50px;
   cursor: move;
+  
 }
 
 .selectedItemImg2 {
   width: 50px;
   object-fit: contain;
 }
+

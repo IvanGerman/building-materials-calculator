@@ -14,7 +14,7 @@ const ItemDescription = () => {
  
   return (
     <>
-        <p>Тёс (25мм) </p>
+        <p data-thickness='25'> Тёс (25мм) </p>
         <div className={styles.selectedItemImg} draggable="true">
           <img className={styles.selectedItemImg2} src={board} alt="" />
         </div>

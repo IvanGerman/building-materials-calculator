@@ -60,7 +60,26 @@ const Item25 = () => {
             if ( isItemInsideBasket === true ) {
               console.log('adjustQuantity');
               const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-              putDataToOrderInfoDivs(orderInfoWrapper);
+              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
+              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
+            }
+            return
+          });
+          widthInput.addEventListener('change', () => {
+            if ( isItemInsideBasket === true ) {
+              console.log('adjustQuantity');
+              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
+              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
+            }
+            return
+          });
+          lengthInput.addEventListener('change', () => {
+            if ( isItemInsideBasket === true ) {
+              console.log('adjustQuantity');
+              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
+              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
             }
             return
           })
@@ -73,17 +92,21 @@ const Item25 = () => {
         if (currentToyParentElement.children.length <= 1) {
           const orderInfoWrapper = document.createElement("div");
           orderInfoWrapper.className = "orderInfoWrapper";
-          //orderInfoWrapper.innerHTML = `${getDataFromInputs()} шт.`;
           currentToyParentElement.appendChild(orderInfoWrapper);
+          const itemSize = document.createElement("div");
+          itemSize.className = "itemSize";
+          currentToyParentElement.appendChild(itemSize);
         }
 
         //put input data inside of order info divs
-        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement) => {
+        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement) => {
           infoDiv1!.innerHTML = `${getDataFromInputs()[0]} шт.`;
+          infoDiv2!.innerHTML = `25 * ${getDataFromInputs()[1]} * ${getDataFromInputs()[2]}000`;
         }
         if (currentToyParentElement.children.length > 1) {
           const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-          putDataToOrderInfoDivs(orderInfoWrapper);
+          const itemSize: HTMLElement = document.querySelector('.itemSize')!;
+          putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
         }
      
       };

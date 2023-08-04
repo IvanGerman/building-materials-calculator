@@ -13,3 +13,7 @@
   width: 50px;
   object-fit: contain;
 }
+
+#quantity {
+  height: 2vh;
+}
