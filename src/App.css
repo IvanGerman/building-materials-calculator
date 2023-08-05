@@ -6,30 +6,14 @@
   align-items: center;
 }
 
-/* .basket {
-  width: 500px;
-  height: 300px;
-} */
-
-/* .single-selected-item {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10vw;
-}
-
-.selected-item-img {
-  width: 50px;
-  cursor: move;
-}
-
-.selected-item-img2 {
-  width: 50px;
-  object-fit: contain;
-} */
 
 .orderInfoWrapper {
   width: 50px;
   height: 3vh;
+  text-align: center;
 }
 
+.itemSize {
+  height: 3vh;
+}
 

@@ -56,33 +56,19 @@ const Item25 = () => {
         // it should be handled only when isItemInsideBasket = true, 
         // if isItemInsideBasket is becoming false we must remove eventlist.
         if ( isItemInsideBasket === true ) {
-          quantityInput.addEventListener('change', () => {
-            if ( isItemInsideBasket === true ) {
-              console.log('adjustQuantity');
-              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
-            }
-            return
-          });
-          widthInput.addEventListener('change', () => {
-            if ( isItemInsideBasket === true ) {
-              console.log('adjustQuantity');
-              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
-            }
-            return
-          });
-          lengthInput.addEventListener('change', () => {
-            if ( isItemInsideBasket === true ) {
-              console.log('adjustQuantity');
-              const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-              const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-              putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
-            }
-            return
+          [quantityInput, widthInput, lengthInput].forEach((elem) => {
+            elem.addEventListener('change', () => {
+              if ( isItemInsideBasket === true ) {
+                console.log('adjustQuantity');
+                const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
+                const itemSize: HTMLElement = document.querySelector('.itemSize')!;
+                const itemVolume: HTMLElement = document.querySelector('.itemVolume')!;
+                putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
+              }
+              return
+            })
           })
+          
         }
         
 
@@ -96,17 +82,22 @@ const Item25 = () => {
           const itemSize = document.createElement("div");
           itemSize.className = "itemSize";
           currentToyParentElement.appendChild(itemSize);
+          const itemVolume = document.createElement("div");
+          itemVolume.className = "itemVolume";
+          currentToyParentElement.appendChild(itemVolume);
         }
 
         //put input data inside of order info divs
-        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement) => {
+        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement, infoDiv3: HTMLElement) => {
           infoDiv1!.innerHTML = `${getDataFromInputs()[0]} шт.`;
-          infoDiv2!.innerHTML = `25 * ${getDataFromInputs()[1]} * ${getDataFromInputs()[2]}000`;
+          infoDiv2!.innerHTML = `25*${getDataFromInputs()[1]}*${getDataFromInputs()[2]}000`;
+          infoDiv3!.innerHTML = `${Number(getDataFromInputs()[3]).toFixed(2)} м3`;
         }
         if (currentToyParentElement.children.length > 1) {
           const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
           const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-          putDataToOrderInfoDivs(orderInfoWrapper, itemSize);
+          const itemVolume: HTMLElement = document.querySelector('.itemVolume')!;
+          putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
         }
      
       };
