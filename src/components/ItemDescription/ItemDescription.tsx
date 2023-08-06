@@ -1,10 +1,11 @@
+//@ts-nocheck
 import React, { useEffect } from "react";
 
 import styles from './ItemDescription.module.css';
 import board from './../../assets/img/doska25-100.png'
 
 
-const ItemDescription = () => { 
+const ItemDescription = (props) => { 
 
   useEffect(() => {
 
@@ -14,7 +15,7 @@ const ItemDescription = () => {
  
   return (
     <>
-        <p data-thickness='25'> Тёс (25мм) </p>
+        <p data-thickness={props.itemThickness}>{props.itemName}</p>
         <div className={styles.selectedItemImg} draggable="true">
           <img className={styles.selectedItemImg2} src={board} alt="" />
         </div>

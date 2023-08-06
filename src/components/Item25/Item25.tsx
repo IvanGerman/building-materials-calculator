@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect } from "react";
 
 import styles from './Item25.module.css';
@@ -6,7 +7,7 @@ import ItemDescription, { selectedItem } from "../ItemDescription/ItemDescriptio
 import ItemDataInputs, { lengthInput, quantityInput, widthInput } from "../ItemDataInputs/ItemDataInputs";
 
 
-const Item25 = () => { 
+const Item25 = (props) => { 
 
   useEffect(() => {
 
@@ -125,7 +126,7 @@ const Item25 = () => {
   return (
     <div className={styles.singleSelectedItem}>
         
-        <ItemDescription/>
+        <ItemDescription itemName={props.itemName} itemThickness={props.itemThickness}/>
         <ItemDataInputs/>
         
     </div>
