@@ -10,8 +10,10 @@ function App() {
   return (
     <div className="App">
       
-      <Item25 itemName={state.board25[0]} itemThickness={state.board25[1]} />
-      <Item25 itemName={state.board50[0]} itemThickness={state.board50[1]} />
+      <div className="singleSelectedItemContainer">
+        <Item25 itemName={state.board25[0]} itemThickness={state.board25[1]} />
+        <Item25 itemName={state.board50[0]} itemThickness={state.board50[1]} />
+      </div>
       <Basket/>
       
     </div>

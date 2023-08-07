@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import styles from './Item25.module.css';
 import { basketTargetZone } from "../Basket/Basket";
-import ItemDescription, { selectedItem } from "../ItemDescription/ItemDescription";
+import ItemDescription from "../ItemDescription/ItemDescription";
 import ItemDataInputs, { lengthInput, quantityInput, widthInput } from "../ItemDataInputs/ItemDataInputs";
 
 
@@ -11,6 +11,7 @@ const Item25 = (props) => {
 
   useEffect(() => {
 
+    const singleSelectedItemContainer = document.querySelector('.singleSelectedItemContainer');
     let isItemInsideBasket: boolean;
 
     // taking data from input/select elements
@@ -29,11 +30,23 @@ const Item25 = (props) => {
     }  
     
 
-    selectedItem.addEventListener('dragstart', (event) => {
-      console.log('selectedItem.ondragstart'); 
+    singleSelectedItemContainer.addEventListener('dragstart', (event) => {
+      console.log('singleSelectedItemContainer.ondragstart'); 
       const currentToy: HTMLImageElement = event.target as HTMLImageElement;
       if (currentToy.tagName === 'IMG') {
       const currentToyParentElement = currentToy.parentElement!;
+
+      //add eventlistener to the currentToyParentElement to move it to his previous place on double click
+      currentToyParentElement.addEventListener('dblclick', () => {
+      while (currentToyParentElement.childNodes.length > 1) {
+        currentToyParentElement.removeChild(currentToyParentElement.lastChild!);
+      }
+      Object.assign(currentToyParentElement.style, {
+        position: 'static'
+      });
+      isItemInsideBasket = false
+    });
+
       putItemToBasket(currentToyParentElement);
       }
     });
@@ -106,17 +119,6 @@ const Item25 = (props) => {
       basketTargetZone.ondrop = handleDrop2;
       
     }
-
-    //add eventlistener to the selectedItem to move it to his previous place on double click
-    selectedItem.addEventListener('dblclick', () => {
-      while (selectedItem.childNodes.length > 1) {
-        selectedItem.removeChild(selectedItem.lastChild!);
-      }
-      Object.assign(selectedItem.style, {
-        position: 'static'
-      });
-      isItemInsideBasket = false
-    });
     
   })
 
