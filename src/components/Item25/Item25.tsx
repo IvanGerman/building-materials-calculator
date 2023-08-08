@@ -16,10 +16,10 @@ const Item25 = (props) => {
 
     // taking data from input/select elements
       
-    const getDataFromInputs = () => {
-      let quantity = quantityInput.value;
-      let width = widthInput.value;
-      let length = lengthInput.value;
+    const getDataFromInputs = (widthInp, lengthInp, quantityInp) => {
+      let quantity = quantityInp.value;
+      let width = widthInp.value;
+      let length = lengthInp.value;
       console.log(quantity);
       console.log(width);
       console.log(length);
@@ -57,6 +57,19 @@ const Item25 = (props) => {
       console.log('putItemToBasket');
       function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
 
+        //here we take inputs elements and their data
+        console.log('currentToyParentElement--',currentToyParentElement);
+        let nextSibling = currentToyParentElement.nextElementSibling;
+        const allSiblings = [];
+        while(nextSibling) {
+          allSiblings.push(nextSibling)
+          nextSibling = nextSibling.nextElementSibling;
+        };
+        const allInputSiblings = [ allSiblings[1], allSiblings[3], allSiblings[5]];
+        console.log(allInputSiblings);
+        getDataFromInputs( allSiblings[1], allSiblings[3], allSiblings[5] );
+        
+        
         isItemInsideBasket = true;
 
         event.preventDefault();
@@ -70,7 +83,7 @@ const Item25 = (props) => {
         // it should be handled only when isItemInsideBasket = true, 
         // if isItemInsideBasket is becoming false we must remove eventlist.
         if ( isItemInsideBasket === true ) {
-          [quantityInput, widthInput, lengthInput].forEach((elem) => {
+          [allSiblings[5], allSiblings[1], allSiblings[3]].forEach((elem) => {
             elem.addEventListener('change', () => {
               if ( isItemInsideBasket === true ) {
                 console.log('adjustQuantity');
@@ -103,6 +116,8 @@ const Item25 = (props) => {
 
         //put input data inside of order info divs
         const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement, infoDiv3: HTMLElement) => {
+
+          //here put instead of getDataFromInputs already counted data (like currentQuantity)
           infoDiv1!.innerHTML = `${getDataFromInputs()[0]} шт.`;
           infoDiv2!.innerHTML = `25*${getDataFromInputs()[1]}*${getDataFromInputs()[2]}000`;
           infoDiv3!.innerHTML = `${Number(getDataFromInputs()[3]).toFixed(2)} м3`;
