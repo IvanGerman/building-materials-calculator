@@ -17,9 +17,12 @@ const Item25 = (props) => {
     // taking data from input/select elements
       
     const getDataFromInputs = (widthInp, lengthInp, quantityInp) => {
-      let quantity = quantityInp.value;
-      let width = widthInp.value;
-      let length = lengthInp.value;
+      let quantity;
+      let width;
+      let length;
+      if (quantityInp) { quantity = quantityInp.value }
+      if (lengthInp) { length = lengthInp.value }
+      if (widthInp) { width = widthInp.value }
       console.log(quantity);
       console.log(width);
       console.log(length);
@@ -118,9 +121,9 @@ const Item25 = (props) => {
         const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement, infoDiv3: HTMLElement) => {
 
           //here put instead of getDataFromInputs already counted data (like currentQuantity)
-          infoDiv1!.innerHTML = `${getDataFromInputs()[0]} шт.`;
-          infoDiv2!.innerHTML = `25*${getDataFromInputs()[1]}*${getDataFromInputs()[2]}000`;
-          infoDiv3!.innerHTML = `${Number(getDataFromInputs()[3]).toFixed(2)} м3`;
+          infoDiv1!.innerHTML = `${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[0]} шт.`;
+          infoDiv2!.innerHTML = `25*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[1]}*${getDataFromInputs()[2]}000`;
+          infoDiv3!.innerHTML = `${Number(getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[3]).toFixed(2)} м3`;
         }
         if (currentToyParentElement.children.length > 1) {
           const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
