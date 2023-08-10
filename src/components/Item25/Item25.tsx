@@ -122,7 +122,7 @@ const Item25 = (props) => {
 
           //here put instead of getDataFromInputs already counted data (like currentQuantity)
           infoDiv1!.innerHTML = `${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[0]} шт.`;
-          infoDiv2!.innerHTML = `25*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[1]}*${getDataFromInputs()[2]}000`;
+          infoDiv2!.innerHTML = `25*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[1]}*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[2]}000`;
           infoDiv3!.innerHTML = `${Number(getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[3]).toFixed(2)} м3`;
         }
         if (currentToyParentElement.children.length > 1) {
