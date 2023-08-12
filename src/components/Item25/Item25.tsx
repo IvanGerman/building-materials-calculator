@@ -146,8 +146,8 @@ const Item25 = (props) => {
   return (
     <div className={styles.singleSelectedItem}>
         
-        <ItemDescription itemName={props.itemName} itemThickness={props.itemThickness}/>
-        <ItemDataInputs/>
+        <ItemDescription itemName={props.itemName} itemThickness={props.itemThickness} />
+        <ItemDataInputs itemName={props.itemName} />
         
     </div>
   )
