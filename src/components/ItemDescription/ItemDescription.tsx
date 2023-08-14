@@ -11,12 +11,15 @@ const ItemDescription = (props) => {
 
     const selectedItemForExp: HTMLElement = document.querySelector(`.${styles.selectedItemImg}`) as HTMLElement;
     selectedItem = selectedItemForExp;
+
+    console.log('555-', selectedItem.getAttribute("data-itemname"));
+    
   })
  
   return (
     <>
         <p data-thickness={props.itemThickness}>{props.itemName}</p>
-        <div className={styles.selectedItemImg} draggable="true">
+        <div className={styles.selectedItemImg} data-itemname={props.dataItemName} draggable="true">
           <img className={styles.selectedItemImg2} src={board} alt="" />
         </div>
     </>

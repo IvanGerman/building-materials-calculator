@@ -62,6 +62,11 @@ const Item25 = (props) => {
 
         //here we take inputs elements and their data
         console.log('currentToyParentElement--',currentToyParentElement);
+        let inputElementsClass = currentToyParentElement.getAttribute("data-itemname");
+        console.log('inputElementsClass---',inputElementsClass);
+        const singleItemAllInputs = document.querySelectorAll(`.${inputElementsClass}`);
+        console.log('singleItemAllInputs--',singleItemAllInputs);
+        
         let nextSibling = currentToyParentElement.nextElementSibling;
         const allSiblings = [];
         while(nextSibling) {
@@ -146,8 +151,8 @@ const Item25 = (props) => {
   return (
     <div className={styles.singleSelectedItem}>
         
-        <ItemDescription itemName={props.itemName} itemThickness={props.itemThickness} />
-        <ItemDataInputs itemName={props.itemName} />
+        <ItemDescription itemName={props.itemName} itemThickness={props.itemThickness} dataItemName={props.dataItemName}/>
+        <ItemDataInputs itemName={props.itemName} dataItemName={props.dataItemName}/>
         
     </div>
   )
