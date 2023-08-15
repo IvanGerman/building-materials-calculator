@@ -95,9 +95,9 @@ const Item25 = (props) => {
             elem.addEventListener('change', () => {
               if ( isItemInsideBasket === true ) {
                 console.log('adjustQuantity');
-                const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-                const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-                const itemVolume: HTMLElement = document.querySelector('.itemVolume')!;
+                const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
+                const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
+                const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
                 putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
               }
               return
@@ -112,13 +112,13 @@ const Item25 = (props) => {
         console.log('currentToyParentElement.children--',currentToyParentElement.children);
         if (currentToyParentElement.children.length <= 1) {
           const orderInfoWrapper = document.createElement("div");
-          orderInfoWrapper.className = "orderInfoWrapper";
+          orderInfoWrapper.className = `orderInfoWrapper${inputElementsClass}`;
           currentToyParentElement.appendChild(orderInfoWrapper);
           const itemSize = document.createElement("div");
-          itemSize.className = "itemSize";
+          itemSize.className = `itemSize${inputElementsClass}`;
           currentToyParentElement.appendChild(itemSize);
           const itemVolume = document.createElement("div");
-          itemVolume.className = "itemVolume";
+          itemVolume.className = `itemVolume${inputElementsClass}`;
           currentToyParentElement.appendChild(itemVolume);
         }
 
@@ -131,9 +131,9 @@ const Item25 = (props) => {
           infoDiv3!.innerHTML = `${Number(getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[3]).toFixed(2)} м3`;
         }
         if (currentToyParentElement.children.length > 1) {
-          const orderInfoWrapper: HTMLElement = document.querySelector('.orderInfoWrapper')!;
-          const itemSize: HTMLElement = document.querySelector('.itemSize')!;
-          const itemVolume: HTMLElement = document.querySelector('.itemVolume')!;
+          const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
+          const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
+          const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
           putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
         }
      
