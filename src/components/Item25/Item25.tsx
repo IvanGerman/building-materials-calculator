@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import styles from './Item25.module.css';
 import { basketTargetZone } from "../Basket/Basket";
 import ItemDescription from "../ItemDescription/ItemDescription";
-import ItemDataInputs, { lengthInput, quantityInput, widthInput } from "../ItemDataInputs/ItemDataInputs";
+import ItemDataInputs from "../ItemDataInputs/ItemDataInputs";
 
 
 const Item25 = (props) => { 
@@ -23,11 +23,8 @@ const Item25 = (props) => {
       if (quantityInp) { quantity = quantityInp.value }
       if (lengthInp) { length = lengthInp.value }
       if (widthInp) { width = widthInp.value }
-      console.log(quantity);
-      console.log(width);
-      console.log(length);
+     
       let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
-      console.log('Объём заказа в кубических метрах = ', volume);
 
       return [ quantity, width, length , volume];
     }  
@@ -61,22 +58,12 @@ const Item25 = (props) => {
       function handleDrop2(event: MouseEvent) { console.log('handleDrop!!!');
 
         //here we take inputs elements and their data
-        console.log('currentToyParentElement--',currentToyParentElement);
         let inputElementsClass = currentToyParentElement.getAttribute("data-itemname");
-        console.log('inputElementsClass---',inputElementsClass);
+        let itemThickness = inputElementsClass.slice(-2);
         const singleItemAllInputs = document.querySelectorAll(`.${inputElementsClass}`);
-        console.log('singleItemAllInputs--',singleItemAllInputs);
         
-        let nextSibling = currentToyParentElement.nextElementSibling;
-        const allSiblings = [];
-        while(nextSibling) {
-          allSiblings.push(nextSibling)
-          nextSibling = nextSibling.nextElementSibling;
-        };
-        const allInputSiblings = [ allSiblings[1], allSiblings[3], allSiblings[5]];
-        console.log(allInputSiblings);
-        getDataFromInputs( allSiblings[1], allSiblings[3], allSiblings[5] );
         
+        getDataFromInputs( singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2] );
         
         isItemInsideBasket = true;
 
@@ -91,10 +78,9 @@ const Item25 = (props) => {
         // it should be handled only when isItemInsideBasket = true, 
         // if isItemInsideBasket is becoming false we must remove eventlist.
         if ( isItemInsideBasket === true ) {
-          [allSiblings[5], allSiblings[1], allSiblings[3]].forEach((elem) => {
+          [singleItemAllInputs[2], singleItemAllInputs[0], singleItemAllInputs[1]].forEach((elem) => {
             elem.addEventListener('change', () => {
               if ( isItemInsideBasket === true ) {
-                console.log('adjustQuantity');
                 const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
                 const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
                 const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
@@ -109,7 +95,6 @@ const Item25 = (props) => {
 
         
         //add divs with order info
-        console.log('currentToyParentElement.children--',currentToyParentElement.children);
         if (currentToyParentElement.children.length <= 1) {
           const orderInfoWrapper = document.createElement("div");
           orderInfoWrapper.className = `orderInfoWrapper${inputElementsClass}`;
@@ -126,9 +111,9 @@ const Item25 = (props) => {
         const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement, infoDiv3: HTMLElement) => {
 
           //here put instead of getDataFromInputs already counted data (like currentQuantity)
-          infoDiv1!.innerHTML = `${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[0]} шт.`;
-          infoDiv2!.innerHTML = `25*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[1]}*${getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[2]}000`;
-          infoDiv3!.innerHTML = `${Number(getDataFromInputs(allSiblings[1], allSiblings[3], allSiblings[5])[3]).toFixed(2)} м3`;
+          infoDiv1!.innerHTML = `${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[0]} шт.`;
+          infoDiv2!.innerHTML = `${itemThickness}*${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[1]}*${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[2]}000`;
+          infoDiv3!.innerHTML = `${Number(getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[3]).toFixed(2)} м3`;
         }
         if (currentToyParentElement.children.length > 1) {
           const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
