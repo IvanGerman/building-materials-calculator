@@ -8,17 +8,8 @@ const ItemDataInputs = (props) => {
 
   useEffect(() => {
 
-    const widthInputForExp: HTMLInputElement = document.querySelector('#width') as HTMLInputElement;
-    widthInput = widthInputForExp;
-    const lengthInputForExp: HTMLInputElement = document.querySelector('#length') as HTMLInputElement;
-    lengthInput = lengthInputForExp;
-    const quantityInputForExp: HTMLInputElement = document.querySelector('#quantity') as HTMLInputElement;
-    quantityInput = quantityInputForExp;
 
-    
-    
-
-  })
+  }, [])
  
   return (
     <>
@@ -48,7 +39,4 @@ const ItemDataInputs = (props) => {
 }
 
 export default ItemDataInputs;
-export let widthInput: HTMLInputElement;
-export let lengthInput: HTMLInputElement;
-export let quantityInput: HTMLInputElement;
 

@@ -9,12 +9,8 @@ const ItemDescription = (props) => {
 
   useEffect(() => {
 
-    const selectedItemForExp: HTMLElement = document.querySelector(`.${styles.selectedItemImg}`) as HTMLElement;
-    selectedItem = selectedItemForExp;
-
-    console.log('555-', selectedItem.getAttribute("data-itemname"));
     
-  })
+  }, [])
  
   return (
     <>
@@ -28,5 +24,3 @@ const ItemDescription = (props) => {
 }
 
 export default ItemDescription;
-export let selectedItem: HTMLElement;
-
