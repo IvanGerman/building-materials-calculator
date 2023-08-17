@@ -6,8 +6,8 @@ import { basketTargetZone } from "../Basket/Basket";
 import ItemDescription from "../ItemDescription/ItemDescription";
 import ItemDataInputs from "../ItemDataInputs/ItemDataInputs";
 import { placeItemAfterDrop } from "./modules/placeItemAfterDrop";
-import { getDataFromInputs } from "./modules/getDataFromInputs";
 import { addOrderInfoDivs } from "./modules/addOrderInfoDivs";
+import { putDataToOrderInfoDivs } from "./modules/putDataToOrderInfoDivs";
 
 
 const Item25 = (props) => { 
@@ -35,67 +35,51 @@ const Item25 = (props) => {
         });
         });
 
-        putItemToBasket(currentToyParentElement);
-      };
-
-    });
-
+        //adding eventlistener to the basket to handle item drop event
+        console.log('putItemToBasket');
+        basketTargetZone.ondrop = handleDrop2;
 
 
-    const putItemToBasket = (currentToyParentElement: HTMLElement) => {
-  
-      console.log('putItemToBasket');
-      basketTargetZone.ondrop = handleDrop2;
+        function handleDrop2(event: MouseEvent)  { console.log('handleDrop!!!');
 
+          event.preventDefault();
 
-      function handleDrop2(event: MouseEvent)  { console.log('handleDrop!!!');
+          //here we take input elements (corresponding to droped item)
+          let inputElementsClass = currentToyParentElement.getAttribute("data-itemname");
+          const singleItemAllInputs = document.querySelectorAll(`.${inputElementsClass}`);
+          let itemThickness = inputElementsClass.substring(5);
+          
 
-        event.preventDefault();
-
-        //here we take input elements and their data
-        let inputElementsClass = currentToyParentElement.getAttribute("data-itemname");
-        const singleItemAllInputs = document.querySelectorAll(`.${inputElementsClass}`);
-        let itemThickness = inputElementsClass.substring(5);
-        
-
-        //place item inside the basket after drop
-        placeItemAfterDrop (event, currentToyParentElement);
-        
-        // handle case when Item is Inside of Basket and we change values in our inputs
-        singleItemAllInputs.forEach((elem) => {
-            elem.addEventListener('change', () => {
-              if (currentToyParentElement.children.length > 1) {
-                  const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
-                  const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
-                  const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
-                  putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
-                }           
+          //place item inside the basket after drop
+          placeItemAfterDrop (event, currentToyParentElement);
+          
+          // handle case when Item is Inside of Basket and we change values in our inputs
+          singleItemAllInputs.forEach((elem) => {
+              elem.addEventListener('change', () => {
+                if (currentToyParentElement.children.length > 1) {
+                    const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
+                    const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
+                    const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
+                    putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness);
+                  }           
+              })
             })
-          })
-        
-        //add divs with order info
-        if (currentToyParentElement.children.length <= 1) {
-          addOrderInfoDivs(currentToyParentElement, inputElementsClass);
-        }
+          
+          //add divs with order info
+          if (currentToyParentElement.children.length <= 1) {
+            addOrderInfoDivs(currentToyParentElement, inputElementsClass);
+          }
 
-        //put input data inside of order info divs
-        const putDataToOrderInfoDivs = (infoDiv1: HTMLElement, infoDiv2: HTMLElement, infoDiv3: HTMLElement) => {
-
-          //here put instead of getDataFromInputs already counted data (like currentQuantity)
-          infoDiv1!.innerHTML = `${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[0]} шт.`;
-          infoDiv2!.innerHTML = `${itemThickness}*${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[1]}*${getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[2]}000`;
-          infoDiv3!.innerHTML = `${Number(getDataFromInputs(singleItemAllInputs[0], singleItemAllInputs[1], singleItemAllInputs[2])[3]).toFixed(2)} м3`;
-        }
-        if (currentToyParentElement.children.length > 1) {
-          const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
-          const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
-          const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
-          putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume);
-        }
-     
-      };     
-    }
-    
+          //put data to order info divs
+          if (currentToyParentElement.children.length > 1) {
+            const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
+            const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
+            const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
+            putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness);
+          }     
+        }; 
+      };
+    }); 
   })
 
   
