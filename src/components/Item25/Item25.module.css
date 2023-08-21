@@ -1,7 +1,10 @@
 .singleSelectedItem {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10vw;
+  display: grid;
+  justify-content: center;
+}
+
+.singleSelectedItem p {
+  text-align: center;
 }
 
 .selectedItemImg {
