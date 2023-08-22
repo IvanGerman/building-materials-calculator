@@ -18,8 +18,8 @@ function App() {
       <div className="volumeResult"></div>
       <div className="singleSelectedItemContainer">
         <Item25 itemName={state.board25[0]} itemThickness={state.board25[1]} dataItemName={state.board25[2]}/>
-        <Item25 itemName={state.board50[0]} itemThickness={state.board50[1]} dataItemName={state.board50[2]}/>
         <Item25 itemName={state.bar50[0]} itemThickness={state.bar50[1]} dataItemName={state.bar50[2]}/>
+        <Item25 itemName={state.board50[0]} itemThickness={state.board50[1]} dataItemName={state.board50[2]}/>
       </div>
       <Basket/>
       <div className="singleSelectedItemContainer">
