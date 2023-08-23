@@ -1,5 +1,6 @@
 //@ts-nocheck
-export const getDataFromInputs = (widthInp, lengthInp, quantityInp) => {
+//need thickness value
+export const getDataFromInputs = (widthInp, lengthInp, quantityInp, itemThickness) => {
   let quantity;
   let width;
   let length;
@@ -7,7 +8,7 @@ export const getDataFromInputs = (widthInp, lengthInp, quantityInp) => {
   if (lengthInp) { length = lengthInp.value }
   if (widthInp) { width = widthInp.value }
  
-  let volume = ((Number(length) * 1000) * Number(width) * 25 * Number(quantity)) / 1000000000;
+  let volume = ((Number(length) * 1000) * Number(width) * Number(itemThickness) * Number(quantity)) / 1000000000;
 
   return [ quantity, width, length , volume];
 };

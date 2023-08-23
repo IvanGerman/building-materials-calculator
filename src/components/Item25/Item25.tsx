@@ -48,7 +48,7 @@ const Item25 = (props) => {
             //here we take input elements (corresponding to droped item)
             let inputElementsClass = currentToyParentElement.getAttribute("data-itemname");
             const singleItemAllInputs = document.querySelectorAll(`.${inputElementsClass}`);
-            let itemThickness = inputElementsClass.substring(5);
+            let itemThickness = inputElementsClass.substring((inputElementsClass.lastIndexOf("-") + 1));
             
   
             //place item inside the basket after drop

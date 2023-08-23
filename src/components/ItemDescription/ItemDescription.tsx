@@ -10,12 +10,12 @@ import brus150 from './../../assets/img/brus150tr.png';
 import brus200 from './../../assets/img/brus200tr.png';
 
 const imagesObj = {
-  'board25': doska25,
-  'board50': doska50,
-  'bar50': brusok50,
-  'timber100': brus100,
-  'timber150': brus150,
-  'timber200': brus200
+  'board-25': doska25,
+  'board-50': doska50,
+  'bar-50': brusok50,
+  'timber-100': brus100,
+  'timber-150': brus150,
+  'timber-200': brus200
 }
 
 const ItemDescription = (props) => { 

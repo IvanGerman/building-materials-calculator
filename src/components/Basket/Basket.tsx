@@ -22,7 +22,7 @@ const Basket = () => {
     <>
       <img src={basket} alt='' className={styles.basket} useMap="#basket-map"/>
       <map  name="basket-map">
-        <area className={styles.basketTargetZone} id='basketTargetZone' shape="rect" coords="0,0,500,300" alt=''/>
+        <area className={styles.basketTargetZone} id='basketTargetZone' shape="rect" coords="0,0,800,300" alt=''/>
       </map>
     </>
   )
