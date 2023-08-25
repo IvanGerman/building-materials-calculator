@@ -24,6 +24,11 @@
   width: 20vw;
   height: 10vh;
   border: 1px solid red;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  font-weight: 600;
 } 
 
 .singleSelectedItemContainer {

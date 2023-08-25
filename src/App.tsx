@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       
-      <div className="volumeResult"></div>
+      <div className="volumeResult">0,00 м3</div>
       <div className="singleSelectedItemContainer">
         <Item25 itemName={state.board25[0]} itemThickness={state.board25[1]} dataItemName={state.board25[2]}/>
         <Item25 itemName={state.bar50[0]} itemThickness={state.bar50[1]} dataItemName={state.bar50[2]}/>

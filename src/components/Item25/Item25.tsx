@@ -61,7 +61,7 @@ const Item25 = (props) => {
                       const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
                       const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
                       const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
-                      putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness);
+                      putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness, inputElementsClass);
                     }           
                 })
               })
@@ -76,7 +76,7 @@ const Item25 = (props) => {
               const orderInfoWrapper: HTMLElement = document.querySelector(`.orderInfoWrapper${inputElementsClass}`)!;
               const itemSize: HTMLElement = document.querySelector(`.itemSize${inputElementsClass}`)!;
               const itemVolume: HTMLElement = document.querySelector(`.itemVolume${inputElementsClass}`)!;
-              putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness);
+              putDataToOrderInfoDivs(orderInfoWrapper, itemSize, itemVolume, singleItemAllInputs, itemThickness, inputElementsClass);
             }     
           }; 
         };
