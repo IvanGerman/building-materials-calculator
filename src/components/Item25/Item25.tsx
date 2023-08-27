@@ -8,6 +8,7 @@ import ItemDataInputs from "../ItemDataInputs/ItemDataInputs";
 import { placeItemAfterDrop } from "./modules/placeItemAfterDrop";
 import { addOrderInfoDivs } from "./modules/addOrderInfoDivs";
 import { putDataToOrderInfoDivs } from "./modules/putDataToOrderInfoDivs";
+import { getResultVolume } from "./modules/getResultVolume";
 
 
 const Item25 = (props) => { 
@@ -34,6 +35,11 @@ const Item25 = (props) => {
           Object.assign(currentToyParentElement.style, {
             position: 'static'
           });
+          //here remove dblclick event list
+
+          //substracting item volume from the final result volume displayed in volume div
+          let currentToy = currentToyParentElement.getAttribute("data-itemname");
+          getResultVolume(currentToy, 0);
           });
   
           //adding eventlistener to the basket to handle item drop event

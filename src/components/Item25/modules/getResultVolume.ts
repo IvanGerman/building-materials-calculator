@@ -11,12 +11,12 @@ export const resultVolumeObj = {
 
 export const getResultVolume = (currentItem, volume) => {
 
+  const volumeResult = document.querySelector('.volumeResult');
+  let finalVolume;
+
   resultVolumeObj[currentItem] = volume;
   const sumValues = obj => Object.values(obj).reduce((a, b) => Number(a) + Number(b), 0);
-  let finalVolume = sumValues(resultVolumeObj).toFixed(2); 
-
-  const volumeResult = document.querySelector('.volumeResult');
-
+  finalVolume = sumValues(resultVolumeObj).toFixed(2); 
   
   volumeResult.innerHTML = `${finalVolume} м3`;
   
