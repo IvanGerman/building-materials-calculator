@@ -28,19 +28,21 @@ const Item25 = (props) => {
         
   
           //adding eventlistener to the item to move it to his previous place on double click
-          currentToyParentElement.addEventListener('dblclick', () => {
-          while (currentToyParentElement.childNodes.length > 1) {
-            currentToyParentElement.removeChild(currentToyParentElement.lastChild!);
-          }
-          Object.assign(currentToyParentElement.style, {
-            position: 'static'
-          });
-          //here remove dblclick event list
+          const callback = () => {
+            while (currentToyParentElement.childNodes.length > 1) {
+              currentToyParentElement.removeChild(currentToyParentElement.lastChild!);
+            }
+            Object.assign(currentToyParentElement.style, {
+              position: 'static'
+            });            
+            //here remove dblclick event list
+            currentToyParentElement.removeEventListener('dblclick', callback);
+            //substracting item volume from the final result volume displayed in volume div
+            let currentToy = currentToyParentElement.getAttribute("data-itemname");
+            getResultVolume(currentToy, 0);
+          };
 
-          //substracting item volume from the final result volume displayed in volume div
-          let currentToy = currentToyParentElement.getAttribute("data-itemname");
-          getResultVolume(currentToy, 0);
-          });
+          currentToyParentElement.addEventListener('dblclick', callback);
   
           //adding eventlistener to the basket to handle item drop event
           console.log('putItemToBasket');
